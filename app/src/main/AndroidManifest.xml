@@ -2,17 +2,30 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gongjian.arcoresceneformdemo">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--这个标签表明这个应用程序需要ARCore。
+    这导致应用程序只能在支持ARCore的设备上显示在Google Play商店中。-->
+    <uses-feature android:name="android.hardware.camera.ar" android:required="true"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <!--这个标签表明这个应用程序需要ARCore。这导致应用程序只能在支持ARCore
+        的设备上显示在Google Play商店中。-->
+        <meta-data android:name="com.google.ar.core" android:value="required" />
+
+        <activity android:name=".MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
