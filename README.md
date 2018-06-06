@@ -1,3 +1,4 @@
 # arcoreDemo
-使用arcore 和 sceneform 在ar环境的demo
-结合google两个sceneform案例  尝试做一个有旋转 缩放 移动 的demo
+-结合google两个sceneform案例  
+-有连个按钮 分别添加两个星球
+-增加删除 按钮在星球上方
