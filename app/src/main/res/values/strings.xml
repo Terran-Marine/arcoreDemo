@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ArcoreSceneformDemo</string>
+    <string name="input">输入要显示的文字</string>
 </resources>
