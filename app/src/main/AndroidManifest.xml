@@ -5,6 +5,12 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
+    <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/file_paths" />
+
     <!--
     这个标签表明这个应用程序需要ARCore。
     这导致应用程序只能在支持ARCore的设备上显示在Google Play商店中。
@@ -30,6 +36,7 @@
             android:name="com.google.ar.core"
             android:value="required" />
 
+
         <activity
             android:name=".ui.activity.StarActivity"
             android:configChanges="orientation|screenSize"
@@ -51,12 +58,9 @@
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="me.iwf.photopicker.PhotoPickerActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name="me.iwf.photopicker.PhotoPagerActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".ui.activity.TestActivity"></activity>
+            android:name=".ui.activity.TestActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

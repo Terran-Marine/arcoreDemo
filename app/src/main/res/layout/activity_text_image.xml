@@ -49,11 +49,4 @@
         android:textColor="@color/context"
         android:textSize="18sp"
         android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/UI_testImage"
-        android:layout_width="200dp"
-        android:layout_height="200dp" />
-
-
 </RelativeLayout>

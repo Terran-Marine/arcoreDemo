@@ -27,10 +27,10 @@ class HomeActivity : AppCompatActivity() {
             this@HomeActivity.startActivity(intent)
         }
 
-        UI_test.setOnClickListener {
-            val intent = Intent()
-            intent.setClass(this@HomeActivity, TestActivity::class.java)
-            this@HomeActivity.startActivity(intent)
-        }
+//        UI_test.setOnClickListener {
+//            val intent = Intent()
+//            intent.setClass(this@HomeActivity, TestActivity::class.java)
+//            this@HomeActivity.startActivity(intent)
+//        }
     }
 }

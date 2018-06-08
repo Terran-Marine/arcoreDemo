@@ -4,7 +4,6 @@
     android:layout_height="100dp">
 
     <ImageView
-        android:background="@color/context"
         android:id="@+id/UI_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
