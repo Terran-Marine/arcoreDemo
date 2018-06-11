@@ -27,7 +27,7 @@ import java.util.concurrent.ExecutionException
 
 @RuntimePermissions
 class TextImageActivity : AppCompatActivity() {
-    val TAG = "TextImageActivity";
+    val TAG = "TextImageActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +37,6 @@ class TextImageActivity : AppCompatActivity() {
         initView()
         setUpGesture()
     }
-
 
     private var hasFinishedLoading: Boolean = false
 
@@ -58,6 +57,7 @@ class TextImageActivity : AppCompatActivity() {
         val imageFuture = ViewRenderable.builder()
                 .setView(this@TextImageActivity, R.layout.renderable_image)
                 .build()
+
 
         CompletableFuture.allOf(textFuture, imageFuture)
                 .handle<Any> { notUsed, throwable ->
@@ -202,7 +202,7 @@ class TextImageActivity : AppCompatActivity() {
                     val columnIndex = cursor.getColumnIndex(filePathColumn[0])
                     val path = cursor.getString(columnIndex)  //获取照片路径
                     cursor.close()
-                    val bitmap = BitmapFactory.decodeFile(path)
+//                    val bitmap = BitmapFactory.decodeFile(path)
 
                     loadImage(path)
                 } catch (e: Exception) {
@@ -225,6 +225,6 @@ class TextImageActivity : AppCompatActivity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        onRequestPermissionsResult(requestCode,grantResults)
+        onRequestPermissionsResult(requestCode, grantResults)
     }
 }

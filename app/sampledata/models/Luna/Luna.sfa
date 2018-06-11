@@ -58,7 +58,7 @@
       ],
       file: "sampledata/models/Luna/Luna.gltf",
       name: "Luna",
-      scale: 0.5,
+      scale: 0.3,
       recenter: true,
       suggested_collision: {
          center: {

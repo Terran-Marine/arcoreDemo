@@ -107,7 +107,7 @@
       ],
       file: "sampledata/models/Earth/Earth.gltf",
       name: "Earth",
-      scale: 0.1,
+      scale: 0.3,
       recenter: true,
       suggested_collision: {
          center: {
