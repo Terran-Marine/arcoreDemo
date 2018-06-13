@@ -5,16 +5,12 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import android.widget.TextView
 import com.example.gongjian.arcoresceneformdemo.R
 import com.example.gongjian.arcoresceneformdemo.arSubassembly.DoubleTapTransformableNode
 import com.example.gongjian.arcoresceneformdemo.utils.DemoUtils
 import com.example.gongjian.arcoresceneformdemo.utils.ToastUtils
 import com.google.ar.sceneform.AnchorNode
-import com.google.ar.sceneform.Node
-import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.ModelRenderable
-import com.google.ar.sceneform.rendering.ViewRenderable
 import com.google.ar.sceneform.ux.ArFragment
 import kotlinx.android.synthetic.main.activity_star.*
 import java.util.concurrent.CompletableFuture
@@ -39,6 +35,7 @@ class StarActivity : AppCompatActivity() {
     private lateinit var earthModelRenderable: ModelRenderable
     private lateinit var luanModelRenderable: ModelRenderable
     private lateinit var andyModelRenderable: ModelRenderable
+    private lateinit var tableModelRenderable: ModelRenderable
     private var hasFinishedLoading = false//初始化完成
 //    private lateinit var luanControlText: ViewRenderable
 //    private lateinit var earthControlText: ViewRenderable
@@ -59,9 +56,15 @@ class StarActivity : AppCompatActivity() {
                 .setSource(this@StarActivity, Uri.parse("andy.sfb"))
                 .build()
 
+        val table = ModelRenderable.builder()
+                .setSource(this@StarActivity, Uri.parse("file2018.sfb"))
+                .build()
+
         CompletableFuture.allOf(
                 earthFuture,
-                luanFuture
+                luanFuture,
+                andy,
+                table
         ).handle<Any> { notUsed, throwable ->
             if (throwable != null) {
                 DemoUtils.displayError(this, "无法加载渲染模型", throwable)
@@ -70,6 +73,7 @@ class StarActivity : AppCompatActivity() {
                     earthModelRenderable = earthFuture.get()
                     luanModelRenderable = luanFuture.get()
                     andyModelRenderable = andy.get()
+                    tableModelRenderable = table.get()
                     hasFinishedLoading = true
 
                     Log.i(TAG, "模型渲染完成,当前线程" + Thread.currentThread().name)
@@ -109,6 +113,12 @@ class StarActivity : AppCompatActivity() {
             UI_cancel.text = "已选择andy,点击已识别出来的平面放置,取消点此处"
         }
 
+        UI_addTable.setOnClickListener {
+            addObjID = 4
+            UI_cancel.visibility = View.VISIBLE
+            UI_cancel.text = "已选择桌子,点击已识别出来的平面放置,取消点此处"
+        }
+
         UI_cancel.setOnClickListener {
             addObjID = 0
             UI_cancel.visibility = View.GONE
@@ -122,7 +132,7 @@ class StarActivity : AppCompatActivity() {
 
             if (addObjID == 0) {
 
-                ToastUtils.getInstanc(this@StarActivity).showToast("选择体格需要放置的物体")
+                ToastUtils.getInstanc(this@StarActivity).showToast("选择需要放置的物体")
                 return@setOnTapArPlaneListener
             }
 
@@ -143,6 +153,10 @@ class StarActivity : AppCompatActivity() {
                 }
                 3 -> {
                     andyModelRenderable
+                }
+                4 -> {
+                    Log.i(TAG, "设置table的Renderable")
+                    tableModelRenderable
                 }
                 else -> {
                     null

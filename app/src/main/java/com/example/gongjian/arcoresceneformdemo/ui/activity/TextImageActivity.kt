@@ -8,16 +8,19 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.view.Gravity
 import android.widget.TextView
 import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.gongjian.arcoresceneformdemo.R
+import com.example.gongjian.arcoresceneformdemo.R.string.input
 import com.example.gongjian.arcoresceneformdemo.arSubassembly.DoubleTapTransformableNode
 import com.example.gongjian.arcoresceneformdemo.utils.DemoUtils
 import com.example.gongjian.arcoresceneformdemo.utils.ToastUtils
 import com.google.ar.sceneform.AnchorNode
+import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.rendering.ViewRenderable
 import com.google.ar.sceneform.ux.ArFragment
 import kotlinx.android.synthetic.main.activity_text_image.*
@@ -28,6 +31,8 @@ import java.util.concurrent.ExecutionException
 @RuntimePermissions
 class TextImageActivity : AppCompatActivity() {
     val TAG = "TextImageActivity"
+    val renderableList: ArrayList<ViewRenderable> = arrayListOf()
+    var currentIndex = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,42 +45,41 @@ class TextImageActivity : AppCompatActivity() {
 
     private var hasFinishedLoading: Boolean = false
 
-    private lateinit var textRenderable: ViewRenderable
-    private lateinit var imageRenderable: ViewRenderable
+//    private lateinit var textRenderable: ViewRenderable
+//    private lateinit var imageRenderable: ViewRenderable
 
-    private var addObjID: Int = 0
+    //    private var addObjID: Int = 0
     private val IMAGE = 1
 
-    private var existText = false
-    private var existImage = false
+//    private var existText = false
+//    private var existImage = false
 
     private fun initViewRenderable() {
-        val textFuture = ViewRenderable.builder()
-                .setView(this@TextImageActivity, R.layout.renderable_text)
-                .build()
-
-        val imageFuture = ViewRenderable.builder()
-                .setView(this@TextImageActivity, R.layout.renderable_image)
-                .build()
-
-
-        CompletableFuture.allOf(textFuture, imageFuture)
-                .handle<Any> { notUsed, throwable ->
-                    if (throwable != null) {
-                        DemoUtils.displayError(this, "无法加载渲染模型", throwable)
-                    } else {
-                        try {
-                            textRenderable = textFuture.get()
-                            imageRenderable = imageFuture.get()
-                            hasFinishedLoading = true
-                        } catch (ex: InterruptedException) {
-                            DemoUtils.displayError(this, "无法加载渲染模型", ex)
-                        } catch (ex: ExecutionException) {
-                            DemoUtils.displayError(this, "无法加载渲染模型", ex)
-                        }
-                    }
-                    return@handle null
-                }
+//        val textFuture = ViewRenderable.builder()
+//                .setView(this@TextImageActivity, R.layout.renderable_text)
+//                .build()
+//
+//        val imageFuture = ViewRenderable.builder()
+//                .setView(this@TextImageActivity, R.layout.renderable_image)
+//                .build()
+//
+//        CompletableFuture.allOf(textFuture, imageFuture)
+//                .handle<Any> { notUsed, throwable ->
+//                    if (throwable != null) {
+//                        DemoUtils.displayError(this, "无法加载渲染模型", throwable)
+//                    } else {
+//                        try {
+//                            textRenderable = textFuture.get()
+//                            imageRenderable = imageFuture.get()
+//                            hasFinishedLoading = true
+//                        } catch (ex: InterruptedException) {
+//                            DemoUtils.displayError(this, "无法加载渲染模型", ex)
+//                        } catch (ex: ExecutionException) {
+//                            DemoUtils.displayError(this, "无法加载渲染模型", ex)
+//                        }
+//                    }
+//                    return@handle null
+//                }
     }
 
     lateinit var materialDialog: MaterialDialog.Builder
@@ -85,9 +89,31 @@ class TextImageActivity : AppCompatActivity() {
                 .title(R.string.input)
                 .inputRangeRes(2, 20, R.color.colorPrimaryDark)
                 .input(null, null, { dialog, input ->
-                    //这里生成文字
-                    textRenderable.view.findViewById<TextView>(R.id.UI_msg).text = input
-                    addObjID = 1
+
+                    //                    ModelRenderable.builder()
+//                            .setSource(this, R.raw.andy)
+//                            .build()
+//                            .thenAccept { it -> }
+//                            .exceptionally(
+//                            )
+
+                    lateinit var temp: ViewRenderable
+
+                    ToastUtils.getInstanc(this@TextImageActivity).showToast("正在模型创建....")
+                    ViewRenderable.builder()
+                            .setView(this@TextImageActivity, R.layout.renderable_text)
+                            .build()
+                            .thenAccept {
+                                temp = it
+                                temp.view.findViewById<TextView>(R.id.UI_msg).text = input
+                                renderableList.add(temp)
+                                currentIndex = renderableList.size - 1
+                                ToastUtils.getInstanc(this@TextImageActivity).showToast("模型创建成功")
+                            }
+                            .exceptionally { it ->
+                                ToastUtils.getInstanc(this@TextImageActivity).showToast("模型创建失败")
+                                return@exceptionally null
+                            }
                 })
     }
 
@@ -104,18 +130,13 @@ class TextImageActivity : AppCompatActivity() {
         }
 
         (UI_ArSceneView as ArFragment).setOnTapArPlaneListener { hitResult, plane, motionEvent ->
-            if (!hasFinishedLoading) {
-                ToastUtils.getInstanc(this@TextImageActivity).showToast("稍等 初始化未完成")
-                return@setOnTapArPlaneListener
-            }
+//            if (!hasFinishedLoading) {
+//                ToastUtils.getInstanc(this@TextImageActivity).showToast("稍等 初始化未完成")
+//                return@setOnTapArPlaneListener
+//            }
 
-            if (addObjID == 0) {
+            if (currentIndex == -1) {
                 UI_hint.text = "选择一个需要放置的控件"
-                return@setOnTapArPlaneListener
-            }
-
-            if ((addObjID == 1 && existText) || (addObjID == 2 && existImage)) {
-                UI_hint.text = "当前控件已存在"
                 return@setOnTapArPlaneListener
             }
 
@@ -126,34 +147,14 @@ class TextImageActivity : AppCompatActivity() {
             //创建一个可变换得到节点 在渲染对象放置在节点上
             val transformableNode = DoubleTapTransformableNode((UI_ArSceneView as ArFragment).transformationSystem)
             transformableNode.setParent(anchorNode)
-            transformableNode.renderable = when (addObjID) {
-                1 -> {
-                    existText = true
-                    textRenderable
-                }
-                2 -> {
-                    existImage = true
-                    imageRenderable
-                }
-                else -> {
-                    null
-                }
-            }
+            transformableNode.renderable=renderableList[currentIndex]
 
             transformableNode.setOnDoubleTapListener {
                 anchorNode.removeChild(transformableNode)
-                when (addObjID) {
-                    1 -> {
-                        existText = false
-                    }
-                    2 -> {
-                        existImage = false
-                    }
-                }
-                addObjID = 0
+                currentIndex = -1
 
             }
-            addObjID = 0
+            currentIndex = -1
             UI_hint.text = "放置成功"
             transformableNode.select()
         }
@@ -214,11 +215,26 @@ class TextImageActivity : AppCompatActivity() {
     }
 
     private fun loadImage(btmap: String?) {
-        Glide.with(this@TextImageActivity)
-                .load(btmap)
-                .apply(myOptions)
-                .into(imageRenderable.view.findViewById(R.id.UI_image))
-        addObjID = 2
+        ToastUtils.getInstanc(this@TextImageActivity).showToast("正在模型创建....")
+
+        lateinit var temp: ViewRenderable
+        ViewRenderable.builder()
+                .setView(this@TextImageActivity, R.layout.renderable_image)
+                .build()
+                .thenAccept {
+                    temp = it
+                    Glide.with(this@TextImageActivity)
+                            .load(btmap)
+                            .apply(myOptions)
+                            .into(temp.view.findViewById(R.id.UI_image))
+                    renderableList.add(temp)
+                    currentIndex = renderableList.size - 1
+                    ToastUtils.getInstanc(this@TextImageActivity).showToast("模型创建成功")
+                }
+                .exceptionally { it ->
+                    ToastUtils.getInstanc(this@TextImageActivity).showToast("模型创建失败")
+                    return@exceptionally null
+                }
     }
 
     val myOptions = RequestOptions().error(R.drawable.error_image).placeholder(R.drawable.error_image)

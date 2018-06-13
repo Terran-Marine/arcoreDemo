@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.gongjian.arcoresceneformdemo.R
+import com.example.gongjian.arcoresceneformdemo.R.id.UI_btn
+import com.example.gongjian.arcoresceneformdemo.R.id.UI_iv
 import kotlinx.android.synthetic.main.activity_test.*
 import permissions.dispatcher.*
 
@@ -28,7 +30,6 @@ class TestActivity : AppCompatActivity() {
             showPhotoWithPermissionCheck()
             showPhoto()
         }
-
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -63,8 +64,6 @@ class TestActivity : AppCompatActivity() {
     fun showNeverAskForCamera() {
         Toast.makeText(this, "给个权限啦", Toast.LENGTH_SHORT).show()
     }
-
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
 
