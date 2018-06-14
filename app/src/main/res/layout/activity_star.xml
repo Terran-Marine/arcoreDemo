@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.StarActivity">
+    tools:context=".ui.activity.ModelActivity">
 
     <fragment
         android:id="@+id/UI_ArSceneView"
@@ -28,7 +28,7 @@
             android:id="@+id/UI_addEarth"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/earth" />
+            android:src="@drawable/sofa1" />
 
         <ImageView
             android:id="@+id/UI_addAndy"
@@ -42,14 +42,14 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/sofa" />
+            android:background="@drawable/table" />
 
         <ImageView
             android:id="@+id/UI_addLuan"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/luan" />
+            android:src="@drawable/sofa" />
 
     </LinearLayout>
 
@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/transparent"
+        android:background="#a800ddff"
         android:gravity="center"
         android:textColor="@color/context"
         android:textSize="18sp"

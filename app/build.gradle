@@ -73,19 +73,12 @@ sceneform.asset('sampledata/models/andy/andy.obj',
         'sampledata/models/andy/andy.sfa',
         'src/main/assets/andy')
 
-sceneform.asset('sampledata/models/table/zhuozi_01.fbx',
+sceneform.asset('sampledata/models/model2/Distrcteight_01.fbx',
         'default',
-        'sampledata/models/table/zhuozi_01.sfa',
+        'sampledata/models/model2/Distrcteight_01.sfa',
+        'src/main/assets/Distrcteight_01')
+
+sceneform.asset('sampledata/models/model3/zhuozi_01.fbx',
+        'default',
+        'sampledata/models/model3/zhuozi_01.sfa',
         'src/main/assets/zhuozi_01')
-
-sceneform.asset('sampledata/models/ToffeeBed/Toffee_Bed.fbx',
-        'default',
-        'sampledata/models/ToffeeBed/Toffee_Bed.sfa',
-        'src/main/assets/Toffee_Bed')
-
-
-
-sceneform.asset('sampledata/models/sofa/file2018.fbx',
-        'default',
-        'sampledata/models/sofa/file2018.sfa',
-        'src/main/assets/file2018')

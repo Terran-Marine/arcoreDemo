@@ -38,7 +38,7 @@
 
 
         <activity
-            android:name=".ui.activity.StarActivity"
+            android:name=".ui.activity.ModelActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar" />

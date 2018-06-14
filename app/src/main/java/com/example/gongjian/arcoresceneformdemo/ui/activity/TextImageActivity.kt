@@ -38,49 +38,11 @@ class TextImageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_text_image)
 
-        initViewRenderable()
         initView()
         setUpGesture()
     }
 
-    private var hasFinishedLoading: Boolean = false
-
-//    private lateinit var textRenderable: ViewRenderable
-//    private lateinit var imageRenderable: ViewRenderable
-
-    //    private var addObjID: Int = 0
     private val IMAGE = 1
-
-//    private var existText = false
-//    private var existImage = false
-
-    private fun initViewRenderable() {
-//        val textFuture = ViewRenderable.builder()
-//                .setView(this@TextImageActivity, R.layout.renderable_text)
-//                .build()
-//
-//        val imageFuture = ViewRenderable.builder()
-//                .setView(this@TextImageActivity, R.layout.renderable_image)
-//                .build()
-//
-//        CompletableFuture.allOf(textFuture, imageFuture)
-//                .handle<Any> { notUsed, throwable ->
-//                    if (throwable != null) {
-//                        DemoUtils.displayError(this, "无法加载渲染模型", throwable)
-//                    } else {
-//                        try {
-//                            textRenderable = textFuture.get()
-//                            imageRenderable = imageFuture.get()
-//                            hasFinishedLoading = true
-//                        } catch (ex: InterruptedException) {
-//                            DemoUtils.displayError(this, "无法加载渲染模型", ex)
-//                        } catch (ex: ExecutionException) {
-//                            DemoUtils.displayError(this, "无法加载渲染模型", ex)
-//                        }
-//                    }
-//                    return@handle null
-//                }
-    }
 
     lateinit var materialDialog: MaterialDialog.Builder
 
@@ -89,14 +51,6 @@ class TextImageActivity : AppCompatActivity() {
                 .title(R.string.input)
                 .inputRangeRes(2, 20, R.color.colorPrimaryDark)
                 .input(null, null, { dialog, input ->
-
-                    //                    ModelRenderable.builder()
-//                            .setSource(this, R.raw.andy)
-//                            .build()
-//                            .thenAccept { it -> }
-//                            .exceptionally(
-//                            )
-
                     lateinit var temp: ViewRenderable
 
                     ToastUtils.getInstanc(this@TextImageActivity).showToast("正在模型创建....")
@@ -126,15 +80,9 @@ class TextImageActivity : AppCompatActivity() {
         //图片btn
         UI_addImage.setOnClickListener {
             showPhotoWithPermissionCheck()
-//            showPhoto()
         }
 
         (UI_ArSceneView as ArFragment).setOnTapArPlaneListener { hitResult, plane, motionEvent ->
-//            if (!hasFinishedLoading) {
-//                ToastUtils.getInstanc(this@TextImageActivity).showToast("稍等 初始化未完成")
-//                return@setOnTapArPlaneListener
-//            }
-
             if (currentIndex == -1) {
                 UI_hint.text = "选择一个需要放置的控件"
                 return@setOnTapArPlaneListener
@@ -147,13 +95,16 @@ class TextImageActivity : AppCompatActivity() {
             //创建一个可变换得到节点 在渲染对象放置在节点上
             val transformableNode = DoubleTapTransformableNode((UI_ArSceneView as ArFragment).transformationSystem)
             transformableNode.setParent(anchorNode)
-            transformableNode.renderable=renderableList[currentIndex]
+            transformableNode.renderable = renderableList[currentIndex]
 
             transformableNode.setOnDoubleTapListener {
                 anchorNode.removeChild(transformableNode)
                 currentIndex = -1
 
             }
+
+            transformableNode.scaleController.maxScale = 2f
+            transformableNode.scaleController.minScale = 0.2f
             currentIndex = -1
             UI_hint.text = "放置成功"
             transformableNode.select()

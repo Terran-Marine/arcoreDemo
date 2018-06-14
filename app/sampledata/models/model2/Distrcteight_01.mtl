@@ -1,0 +1,61 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 13.06.2018 15:50:38
+
+newmtl 08___Default
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka E:\001\AR\Distrcteight\Distrcteight_dianzhi02_d.jpg
+	map_Kd E:\001\AR\Distrcteight\Distrcteight_dianzhi02_d.jpg
+	map_bump ??__24_Normal_Bump.tga
+
+newmtl 07___Default
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka E:\001\AR\Distrcteight\Distrcteight_dianzhi01_d.jpg
+	map_Kd E:\001\AR\Distrcteight\Distrcteight_dianzhi01_d.jpg
+	map_bump ??__5_Normal_Bump.tga
+
+newmtl Material__49
+	Ns 41.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.2340 0.2340 0.2340
+	Ke 0.0000 0.0000 0.0000
+	map_Ka E:\001\AR\Distrcteight\Distrcteight_shafajiazhi.jpg
+	map_Kd E:\001\AR\Distrcteight\Distrcteight_shafajiazhi.jpg
+
+newmtl Material__50
+	Ns 32.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.6300 0.6300 0.6300
+	Ke 0.0000 0.0000 0.0000
+	map_Ka E:\001\AR\Distrcteight\xiaotu\3_1.jpg
+	map_Kd E:\001\AR\Distrcteight\xiaotu\3_1.jpg
+	map_bump ??__13_Normal_Bump.tga

@@ -17,7 +17,7 @@ class HomeActivity : AppCompatActivity() {
     private fun initView() {
         UI_starCardView.setOnClickListener {
             val intent = Intent()
-            intent.setClass(this@HomeActivity, StarActivity::class.java)
+            intent.setClass(this@HomeActivity, ModelActivity::class.java)
             this@HomeActivity.startActivity(intent)
         }
 

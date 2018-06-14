@@ -36,8 +36,6 @@ public class DoubleTapTransformableNode extends TransformableNode {
 
     @Override
     public boolean onTouchEvent(HitTestResult hitTestResult, MotionEvent motionEvent) {
-
-
         if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
             if (mPreviousUpEvent != null
                     && mCurrentDownEvent != null
