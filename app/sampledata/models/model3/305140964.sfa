@@ -1,0 +1,68 @@
+{
+   materials: [
+      {
+         name: "material_305140964",
+         parameters: [
+            {
+               baseColor: "305140964_BASE_BLENDED",
+            },
+            {
+               baseColorTint: [
+                  0.58799999999999997,
+                  0.58799999999999997,
+                  0.58799999999999997,
+                  1,
+               ],
+            },
+            {
+               metallic: 1,
+            },
+            {
+               roughness: 0.408248,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+   ],
+   model: {
+      attributes: [
+         "Position",
+         "TexCoord",
+         "Orientation",
+      ],
+      file: "sampledata/models/model3/305140964.obj",
+      name: "305140964",
+      suggested_collision: {
+         center: {
+            x: 0,
+            y: 0,
+            z: 0,
+         },
+         size: {
+            x: 1,
+            y: 1,
+            z: 1,
+         },
+         type: "Box",
+      },
+   },
+   samplers: [
+      {
+         file: "sampledata/models/model3\\305140964_BASE_BLENDED.png",
+         name: "305140964_BASE_BLENDED",
+         pipeline_name: "305140964_BASE_BLENDED.png",
+      },
+      {
+         file: "sampledata/models/model3\\305140964_METALLIC_ROUGHNESS.jpg",
+         name: "305140964_METALLIC_ROUGHNESS",
+         params: {
+            usage_type: "Data",
+         },
+         pipeline_name: "305140964_METALLIC_ROUGHNESS.jpg",
+      },
+   ],
+   version: "0.51:1",
+}

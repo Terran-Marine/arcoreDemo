@@ -48,8 +48,10 @@ class TextImageActivity : AppCompatActivity() {
 
     private fun initView() {
         materialDialog = MaterialDialog.Builder(this)
+                .backgroundColorRes(R.color.context2)
+                .contentColorRes(R.color.white)
                 .title(R.string.input)
-                .inputRangeRes(2, 20, R.color.colorPrimaryDark)
+                .inputRangeRes(2, 20, R.color.white)
                 .input(null, null, { dialog, input ->
                     lateinit var temp: ViewRenderable
 

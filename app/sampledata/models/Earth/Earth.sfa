@@ -122,6 +122,7 @@
          },
          type: "Box",
       },
+      flip_texture_coordinates: true
    },
    samplers: [
       {

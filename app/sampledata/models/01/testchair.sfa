@@ -1,0 +1,61 @@
+{
+   materials: [
+      {
+         name: "Material__25",
+         parameters: [
+            {
+               baseColor: "t_sofa02_test01",
+            },
+            {
+               baseColorTint: [
+                  1,
+                  1,
+                  1,
+                  1,
+               ],
+            },
+            {
+               metallic: 0.15,
+            },
+            {
+               roughness: 0.6,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+   ],
+   model: {
+      attributes: [
+         "Position",
+         "TexCoord",
+         "Orientation",
+      ],
+      file: "sampledata/models/01/testchair.obj",
+      name: "testchair",
+      scale: 0.010156999999999999,
+      suggested_collision: {
+         center: {
+            x: 0,
+            y: 0,
+            z: 0,
+         },
+         size: {
+            x: 1,
+            y: 1,
+            z: 1,
+         },
+         type: "Box",
+      },
+   },
+   samplers: [
+      {
+         file: "sampledata/models/01\\t_sofa02_test01.jpg",
+         name: "t_sofa02_test01",
+         pipeline_name: "t_sofa02_test01.jpg",
+      },
+   ],
+   version: "0.51:1",
+}

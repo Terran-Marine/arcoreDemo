@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import com.afollestad.materialdialogs.MaterialDialog
 import com.example.gongjian.arcoresceneformdemo.R
 import com.example.gongjian.arcoresceneformdemo.arSubassembly.DoubleTapTransformableNode
 import com.example.gongjian.arcoresceneformdemo.utils.DemoUtils
@@ -26,56 +27,64 @@ class ModelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_star)
 
-//        UI_ArSceneView
-        UI_cancel.visibility = View.INVISIBLE
+        initView()
         initModelRenderable()
         setUpGesture()
     }
 
-    private lateinit var earthModelRenderable: ModelRenderable
-    private lateinit var luanModelRenderable: ModelRenderable
-    private lateinit var andyModelRenderable: ModelRenderable
+    private fun initView() {
+        UI_cancel.visibility = View.INVISIBLE
+        MaterialDialog.Builder(this@ModelActivity)
+                .backgroundColorRes(R.color.context2)
+                .contentColorRes(R.color.white)
+                .content("1.先检测平面,多个角度尝试可以加快平面检测\n2.当出现网点平面,选择放置对象\n3.点击屏幕放置对象\n手势:双击-取消,按住-拖拽,双指-旋转缩放")
+                .positiveText("确认")
+                .show()
+    }
+
+    private lateinit var benchModelRenderable: ModelRenderable
+    private lateinit var sofaChairModelRenderable: ModelRenderable
     private lateinit var tableModelRenderable: ModelRenderable
+    private lateinit var sofaModelRenderable: ModelRenderable
     private var hasFinishedLoading = false//初始化完成
 
     /**
      * 初始化ModelRenderable  渲染模型
      * */
     private fun initModelRenderable() {
-        val earthFuture = ModelRenderable.builder()
-                .setSource(this@ModelActivity, Uri.parse("om_hxdrsf_wyc.sfb"))
+        val benchFuture = ModelRenderable.builder()
+                .setSource(this@ModelActivity, Uri.parse("model-good.sfb"))
                 .build()
 
-        val luanFuture = ModelRenderable.builder()
+        val sofaChairFuture = ModelRenderable.builder()
+                .setSource(this@ModelActivity, Uri.parse("testsofa02.sfb"))
+                .build()
+
+        val tableFuture = ModelRenderable.builder()
+                //使用网络加载
+                .setSource(this@ModelActivity, Uri.parse("https://djfile.oss-cn-shanghai.aliyuncs.com/zhuozi_01.sfb"))
+                .build()
+
+        val sofaFuture = ModelRenderable.builder()
                 .setSource(this@ModelActivity, Uri.parse("Distrcteight_01.sfb"))
                 .build()
 
-        val andy = ModelRenderable.builder()
-                .setSource(this@ModelActivity, Uri.parse("andy.sfb"))
-                .build()
-
-        val table = ModelRenderable.builder()
-                .setSource(this@ModelActivity, Uri.parse("zhuozi_01.sfb"))
-                .build()
-
         CompletableFuture.allOf(
-                earthFuture,
-                luanFuture,
-                andy,
-                table
+                benchFuture,
+                sofaChairFuture,
+                tableFuture,
+                sofaFuture
         ).handle<Any> { notUsed, throwable ->
             if (throwable != null) {
                 DemoUtils.displayError(this, "无法加载渲染模型", throwable)
             } else {
                 try {
-                    earthModelRenderable = earthFuture.get()
-                    luanModelRenderable = luanFuture.get()
-                    andyModelRenderable = andy.get()
-                    tableModelRenderable = table.get()
+                    benchModelRenderable = benchFuture.get()
+                    sofaChairModelRenderable = sofaChairFuture.get()
+                    tableModelRenderable = tableFuture.get()
+                    sofaModelRenderable = sofaFuture.get()
                     hasFinishedLoading = true
-
                     Log.i(TAG, "模型渲染完成,当前线程" + Thread.currentThread().name)
-
                 } catch (ex: InterruptedException) {
                     DemoUtils.displayError(this, "Unable to load renderable", ex)
                 } catch (ex: ExecutionException) {
@@ -84,7 +93,6 @@ class ModelActivity : AppCompatActivity() {
             }
             return@handle null
         }
-//                .setSource()
     }
 
     private var addObjID = 0
@@ -93,32 +101,32 @@ class ModelActivity : AppCompatActivity() {
      * 设置手势
      * */
     private fun setUpGesture() {
-        //贵妃椅
+        //长椅
         UI_addEarth.setOnClickListener {
             addObjID = 1
             UI_cancel.visibility = View.VISIBLE
-            UI_cancel.text = "已选择Earth,点击已识别出来的平面放置,取消点此处"
+            UI_cancelIcon.setImageResource(R.drawable.icon001)
         }
 
-        //安卓
+        //沙发凳子
         UI_addAndy.setOnClickListener {
-            addObjID = 3
+            addObjID = 2
             UI_cancel.visibility = View.VISIBLE
-            UI_cancel.text = "已选择andy,点击已识别出来的平面放置,取消点此处"
+            UI_cancelIcon.setImageResource(R.drawable.icon002)
         }
 
         //桌子
         UI_addTable.setOnClickListener {
-            addObjID = 4
+            addObjID = 3
             UI_cancel.visibility = View.VISIBLE
-            UI_cancel.text = "已选择桌子,点击已识别出来的平面放置,取消点此处"
+            UI_cancelIcon.setImageResource(R.drawable.icon003)
         }
 
         //沙发
         UI_addLuan.setOnClickListener {
-            addObjID = 2
+            addObjID = 4
             UI_cancel.visibility = View.VISIBLE
-            UI_cancel.text = "已选择Luan,点击已识别出来的平面放置,取消点此处"
+            UI_cancelIcon.setImageResource(R.drawable.sofa)
         }
 
         UI_cancel.setOnClickListener {
@@ -147,17 +155,16 @@ class ModelActivity : AppCompatActivity() {
 
             transformableNode.renderable = when (addObjID) {
                 1 -> {
-                    earthModelRenderable
+                    benchModelRenderable
                 }
                 2 -> {
-                    luanModelRenderable
+                    sofaChairModelRenderable
                 }
                 3 -> {
-                    andyModelRenderable
+                    tableModelRenderable
                 }
                 4 -> {
-                    Log.i(TAG, "设置table的Renderable")
-                    tableModelRenderable
+                    sofaModelRenderable
                 }
                 else -> {
                     null
@@ -165,12 +172,12 @@ class ModelActivity : AppCompatActivity() {
             }
             transformableNode.scaleController.maxScale = 2f
             transformableNode.scaleController.minScale = 0.1f
-
             transformableNode.setOnDoubleTapListener {
                 anchorNode.removeChild(transformableNode)
             }
             addObjID = 0
             UI_cancel.visibility = View.GONE
+
             transformableNode.select()
         }
     }

@@ -54,7 +54,6 @@ public class DoubleTapTransformableNode extends TransformableNode {
         return super.onTouchEvent(hitTestResult, motionEvent);
     }
 
-
     private boolean isConsideredDoubleTap(MotionEvent firstDown,
                                           MotionEvent firstUp, MotionEvent secondDown) {
         if (secondDown.getEventTime() - firstUp.getEventTime() > DOUBLE_TAP_TIMEOUT) {
@@ -64,7 +63,6 @@ public class DoubleTapTransformableNode extends TransformableNode {
         int deltaY = (int) firstUp.getY() - (int) secondDown.getY();
         return deltaX * deltaX + deltaY * deltaY < 10000;
     }
-
 
     interface OnDoubleTapListener {
         void onDoubleTap();

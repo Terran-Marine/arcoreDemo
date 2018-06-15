@@ -23,7 +23,7 @@ public class MyArFragment extends ArFragment {
         } else if (sessionException instanceof UnavailableDeviceNotCompatibleException) {
             message = "当前设备部不支持AR";
         } else {
-            message = "未能创建AR会话";
+            message = "未能创建AR会话,请查看机型适配,arcore版本与系统版本";
             String var3 = String.valueOf(sessionException);
             Log.e("ArFragment异常", (new StringBuilder(11 + String.valueOf(var3).length())).append("Exception: ").append(var3).toString());
         }

@@ -1,0 +1,225 @@
+{
+   materials: [
+      {
+         name: "08 - Default",
+         parameters: [
+            {
+               baseColor: [
+                  1,
+                  1,
+                  1,
+                  1,
+               ],
+            },
+            {
+               baseColorMap: "Distrcteight_dianzhi02_d",
+            },
+            {
+               normalMap: "Distrcteight_dianzhi02_n",
+            },
+            {
+               interpolatedColor: null,
+            },
+            {
+               metallic: 0,
+            },
+            {
+               metallicMap: null,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               roughnessMap: null,
+            },
+            {
+               reflectance: 0.5,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/fbx_material.sfm",
+      },
+      {
+         name: "07 - Default",
+         parameters: [
+            {
+               baseColor: [
+                  1,
+                  1,
+                  1,
+                  1,
+               ],
+            },
+            {
+               baseColorMap: "Distrcteight_dianzhi01_d",
+            },
+            {
+               normalMap: "Distrcteight_dianzhi01_n",
+            },
+            {
+               interpolatedColor: null,
+            },
+            {
+               metallic: 0,
+            },
+            {
+               metallicMap: null,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               roughnessMap: null,
+            },
+            {
+               reflectance: 0.5,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/fbx_material.sfm",
+      },
+      {
+         name: "Material #49",
+         parameters: [
+            {
+               baseColor: [
+                  1,
+                  1,
+                  1,
+                  1,
+               ],
+            },
+            {
+               baseColorMap: "Distrcteight_shafajiazhi",
+            },
+            {
+               normalMap: null,
+            },
+            {
+               interpolatedColor: null,
+            },
+            {
+               metallic: 0,
+            },
+            {
+               metallicMap: null,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               roughnessMap: null,
+            },
+            {
+               reflectance: 0.5,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/fbx_material.sfm",
+      },
+      {
+         name: "Material #50",
+         parameters: [
+            {
+               baseColor: [
+                  1,
+                  1,
+                  1,
+                  1,
+               ],
+            },
+            {
+               baseColorMap: null,
+            },
+            {
+               normalMap: null,
+            },
+            {
+               interpolatedColor: null,
+            },
+            {
+               metallic: 0,
+            },
+            {
+               metallicMap: null,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               roughnessMap: null,
+            },
+            {
+               reflectance: 0.5,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/fbx_material.sfm",
+      },
+   ],
+   model: {
+      attributes: [
+         "Position",
+         "TexCoord",
+         "Orientation",
+      ],
+      file: "sampledata/models/model2/Distrcteight_01.fbx",
+      name: "Distrcteight_01",
+      scale: 0.012142999999999999,
+      suggested_collision: {
+         center: {
+            x: 0,
+            y: 0,
+            z: 0,
+         },
+         size: {
+            x: 1,
+            y: 1,
+            z: 1,
+         },
+         type: "Box",
+      },
+   },
+   samplers: [
+      {
+         file: "D:\\develop\\apps\\demo\\arcoreDemo\\app\\sampledata\\models\\model2\\Distrcteight_dianzhi02_d.jpg",
+         name: "Distrcteight_dianzhi02_d",
+         pipeline_name: "D:\\develop\\apps\\demo\\arcoreDemo\\app\\sampledata\\models\\model2\\Distrcteight_dianzhi02_d.jpg",
+      },
+      {
+         file: "D:\\develop\\apps\\demo\\arcoreDemo\\app\\sampledata\\models\\model2\\Distrcteight_dianzhi02_n.jpg",
+         name: "Distrcteight_dianzhi02_n",
+         params: {
+            usage_type: "Normal",
+         },
+         pipeline_name: "D:\\develop\\apps\\demo\\arcoreDemo\\app\\sampledata\\models\\model2\\Distrcteight_dianzhi02_n.jpg",
+      },
+      {
+         file: "D:\\develop\\apps\\demo\\arcoreDemo\\app\\sampledata\\models\\model2\\Distrcteight_dianzhi01_d.jpg",
+         name: "Distrcteight_dianzhi01_d",
+         pipeline_name: "D:\\develop\\apps\\demo\\arcoreDemo\\app\\sampledata\\models\\model2\\Distrcteight_dianzhi01_d.jpg",
+      },
+      {
+         file: "D:\\develop\\apps\\demo\\arcoreDemo\\app\\sampledata\\models\\model2\\Distrcteight_dianzhi01_n.jpg",
+         name: "Distrcteight_dianzhi01_n",
+         params: {
+            usage_type: "Normal",
+         },
+         pipeline_name: "D:\\develop\\apps\\demo\\arcoreDemo\\app\\sampledata\\models\\model2\\Distrcteight_dianzhi01_n.jpg",
+      },
+      {
+         file: "D:\\develop\\apps\\demo\\arcoreDemo\\app\\sampledata\\models\\model2\\Distrcteight_shafajiazhi.jpg",
+         name: "Distrcteight_shafajiazhi",
+         pipeline_name: "D:\\develop\\apps\\demo\\arcoreDemo\\app\\sampledata\\models\\model2\\Distrcteight_shafajiazhi.jpg",
+      },
+   ],
+   version: "0.51:1",
+}
