@@ -12,7 +12,9 @@ import com.example.gongjian.arcoresceneformdemo.utils.DemoUtils
 import com.example.gongjian.arcoresceneformdemo.utils.ToastUtils
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.rendering.ModelRenderable
+import com.google.ar.sceneform.rendering.PlaneRenderer
 import com.google.ar.sceneform.ux.ArFragment
+import com.google.ar.sceneform.ux.TransformableNode
 import kotlinx.android.synthetic.main.activity_star.*
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ExecutionException
@@ -93,6 +95,10 @@ class ModelActivity : AppCompatActivity() {
             }
             return@handle null
         }
+
+        (UI_ArSceneView as ArFragment).arSceneView.planeRenderer.material.thenAccept { material ->
+            material.setFloat3(PlaneRenderer.MATERIAL_COLOR, com.google.ar.sceneform.rendering.Color(0.3f, 0.3f, 0.3f, 0.1f))
+        }
     }
 
     private var addObjID = 0
@@ -146,12 +152,14 @@ class ModelActivity : AppCompatActivity() {
             }
 
             //创建一个锚点
-            val anchorNode = AnchorNode(hitResult.createAnchor())
-            anchorNode.setParent((UI_ArSceneView as ArFragment).arSceneView.scene)
+            val anchorNode = AnchorNode(hitResult.createAnchor()).apply {
+                setParent((UI_ArSceneView as ArFragment).arSceneView.scene)
+            }
 
             //创建一个可变换得到节点 在渲染对象放置在节点上
-            val transformableNode = DoubleTapTransformableNode((UI_ArSceneView as ArFragment).transformationSystem)
-            transformableNode.setParent(anchorNode)
+            val transformableNode = TransformableNode((UI_ArSceneView as ArFragment).transformationSystem).apply {
+                setParent(anchorNode)
+            }
 
             transformableNode.renderable = when (addObjID) {
                 1 -> {
@@ -170,15 +178,16 @@ class ModelActivity : AppCompatActivity() {
                     null
                 }
             }
-            transformableNode.scaleController.maxScale = 2f
-            transformableNode.scaleController.minScale = 0.1f
-            transformableNode.setOnDoubleTapListener {
-                anchorNode.removeChild(transformableNode)
-            }
             addObjID = 0
+            transformableNode.apply {
+                scaleController.maxScale = 2f
+                scaleController.minScale = 0.1f
+//                setOnDoubleTapListener {
+//                    anchorNode.removeChild(this)
+//                }
+                select()
+            }
             UI_cancel.visibility = View.GONE
-
-            transformableNode.select()
         }
     }
 }

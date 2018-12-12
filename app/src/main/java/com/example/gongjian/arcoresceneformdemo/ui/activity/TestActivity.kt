@@ -34,11 +34,11 @@ class TestActivity : AppCompatActivity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        onRequestPermissionsResult(requestCode,grantResults)
+        onRequestPermissionsResult(requestCode, grantResults)
     }
 
     @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-     fun showPhoto() {
+    fun showPhoto() {
         val intent = Intent(
                 Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -50,8 +50,8 @@ class TestActivity : AppCompatActivity() {
     fun showRationaleForCamera(request: PermissionRequest) {
         AlertDialog.Builder(this)
                 .setMessage("需要这个权限获取照片")
-                .setPositiveButton("同意", { dialog, button -> request.proceed() })
-                .setNegativeButton("拒接", { dialog, button -> request.cancel() })
+                .setPositiveButton("同意") { dialog, button -> request.proceed() }
+                .setNegativeButton("拒接") { dialog, button -> request.cancel() }
                 .show()
     }
 

@@ -23,6 +23,7 @@ import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.rendering.ViewRenderable
 import com.google.ar.sceneform.ux.ArFragment
+import com.google.ar.sceneform.ux.TransformableNode
 import kotlinx.android.synthetic.main.activity_text_image.*
 import permissions.dispatcher.*
 import java.util.concurrent.CompletableFuture
@@ -52,7 +53,7 @@ class TextImageActivity : AppCompatActivity() {
                 .contentColorRes(R.color.white)
                 .title(R.string.input)
                 .inputRangeRes(2, 20, R.color.white)
-                .input(null, null, { dialog, input ->
+                .input(null, null) { dialog, input ->
                     lateinit var temp: ViewRenderable
 
                     ToastUtils.getInstanc(this@TextImageActivity).showToast("正在模型创建....")
@@ -70,7 +71,7 @@ class TextImageActivity : AppCompatActivity() {
                                 ToastUtils.getInstanc(this@TextImageActivity).showToast("模型创建失败")
                                 return@exceptionally null
                             }
-                })
+                }
     }
 
     private fun setUpGesture() {
@@ -91,25 +92,27 @@ class TextImageActivity : AppCompatActivity() {
             }
 
             //创建一个锚点
-            val anchorNode = AnchorNode(hitResult.createAnchor())
-            anchorNode.setParent((UI_ArSceneView as ArFragment).arSceneView.scene)
-
-            //创建一个可变换得到节点 在渲染对象放置在节点上
-            val transformableNode = DoubleTapTransformableNode((UI_ArSceneView as ArFragment).transformationSystem)
-            transformableNode.setParent(anchorNode)
-            transformableNode.renderable = renderableList[currentIndex]
-
-            transformableNode.setOnDoubleTapListener {
-                anchorNode.removeChild(transformableNode)
-                currentIndex = -1
-
+            val anchorNode = AnchorNode(hitResult.createAnchor()).apply {
+                setParent((UI_ArSceneView as ArFragment).arSceneView.scene)
             }
 
-            transformableNode.scaleController.maxScale = 2f
-            transformableNode.scaleController.minScale = 0.2f
+            //创建一个可变换得到节点 在渲染对象放置在节点上
+            TransformableNode((UI_ArSceneView as ArFragment).transformationSystem).apply {
+                setParent(anchorNode)
+                renderable = renderableList[currentIndex]
+//                setOnDoubleTapListener {
+//                    anchorNode.removeChild(this)
+//                    currentIndex = -1
+//
+//                }
+
+                scaleController.maxScale = 2f
+                scaleController.minScale = 0.2f
+                select()
+            }
+
             currentIndex = -1
             UI_hint.text = "放置成功"
-            transformableNode.select()
         }
     }
 
@@ -195,5 +198,7 @@ class TextImageActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         onRequestPermissionsResult(requestCode, grantResults)
+
+
     }
 }

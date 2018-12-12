@@ -28,6 +28,6 @@ public class MyArFragment extends ArFragment {
             Log.e("ArFragment异常", (new StringBuilder(11 + String.valueOf(var3).length())).append("Exception: ").append(var3).toString());
         }
 
-        Toast.makeText(this.requireActivity(), message, 1).show();
+        Toast.makeText(this.requireActivity(), message, Toast.LENGTH_LONG).show();
     }
 }
